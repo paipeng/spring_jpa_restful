@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
+
+    <bean id="jpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
+
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://127.0.0.1:3306/database?characterEncoding=UTF-8&amp;useSSL=false"/>
+        <property name="username" value="user"/>
+        <property name="password" value="pass"/>
+        <property name="initialSize" value="5"/>
+        <property name="maxActive" value="10"/>
+        <property name="maxIdle" value="0"/>
+        <property name="maxOpenPreparedStatements" value="100"/>
+        <property name="maxWait" value="1000"/>
+        <property name="minEvictableIdleTimeMillis" value="2000"/>
+        <property name="minIdle" value="2"/>
+        <property name="poolPreparedStatements" value="true"/>
+    </bean>
+
+
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="jpaVendorAdapter" ref="jpaVendorAdapter"/>
+        <property name="packagesToScan" value="com.paipeng.spring_jpa_restful.dao"/>
+
+        <property name="jpaProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQL57Dialect</prop>
+                <prop key="hibernate.dialect.storage_engine">innodb</prop>
+                <prop key="hibernate.ejb.naming_strategy">org.hibernate.cfg.ImprovedNamingStrategy</prop>
+                <prop key="hibernate.cache.provider_class">org.hibernate.cache.NoCacheProvider</prop>
+                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.format_sql">true</prop>
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
+                <prop key="hibernate.max_fetch_depth">2</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="persistenceExceptionTranslationPostProcessor"
+          class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
+
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>
+    </bean>
+
+    <jpa:repositories base-package="com.paipeng.spring_jpa_restful.dao.repository" transaction-manager-ref="transactionManager"
+                      entity-manager-factory-ref="entityManagerFactory"/>
+
+    <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
+
+
+</beans>
