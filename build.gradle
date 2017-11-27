@@ -8,30 +8,27 @@ repositories {
     mavenCentral()
 }
 
-String springVersion = '4.3.7.RELEASE'
-String jacksonVersion = '2.8.7'
+
+String springVersion = '5.0.1.RELEASE'
+String jacksonVersion = '2.9.0'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 dependencies {
     //日志
-    compile('log4j:log4j:1.2.17');
-    compile('org.slf4j:slf4j-log4j12:1.7.21');
+    compile('log4j:log4j:1.2.17')
+    compile('org.slf4j:slf4j-log4j12:1.7.21')
 
-    //图片处理架构
-    compile('org.apache.sanselan:sanselan:0.97-incubator');
 
     //spring依赖
-    compile('commons-logging:commons-logging:1.2');
-    compile('aopalliance:aopalliance:1.0');
-    compile('dom4j:dom4j:1.6.1');
-    compile('org.javassist:javassist:3.15.0-GA');
-    compile('org.jboss.logging:jboss-logging:3.1.0.GA');
-    compile('org.jboss.spec.javax.transaction:jboss-transaction-api_1.1_spec:1.0.1.Final');
+    compile('commons-logging:commons-logging:1.2')
+    compile('aopalliance:aopalliance:1.0')
+    compile('dom4j:dom4j:1.6.1')
+    compile('org.javassist:javassist:3.15.0-GA')
+    compile('org.jboss.logging:jboss-logging:3.1.0.GA')
+    compile('org.jboss.spec.javax.transaction:jboss-transaction-api_1.1_spec:1.0.1.Final')
 
-    //JNA架构
-    compile('net.java.dev.jna:jna:4.2.2');
 
     //datasource hibernate的依赖
     compile ('commons-dbcp:commons-dbcp:1.4')
@@ -62,7 +59,7 @@ dependencies {
 
     compile("org.springframework:spring-expression:" + springVersion)
     compile("org.springframework:spring-instrument:" + springVersion)
-    compile("org.springframework:spring-instrument-tomcat:" + springVersion)
+    //compile("org.springframework:spring-instrument-tomcat:" + springVersion)
     compile("org.springframework:spring-jdbc:" + springVersion)
     compile("org.springframework:spring-jms:" + springVersion)
     compile("org.springframework:spring-messaging:" + springVersion)
@@ -72,7 +69,7 @@ dependencies {
     compile("org.springframework:spring-tx:" + springVersion)
     compile("org.springframework:spring-web:" + springVersion)
     compile("org.springframework:spring-webmvc:" + springVersion)
-    compile("org.springframework:spring-webmvc-portlet:" + springVersion)
+    //compile("org.springframework:spring-webmvc-portlet:" + springVersion)
     compile("org.springframework:spring-websocket:" + springVersion)
 
     // apache 上传文件的两个jar类
@@ -95,8 +92,4 @@ dependencies {
 
     //testing
     testCompile group: 'junit', name: 'junit', version: '4.11'
-
-
-    // https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-servlet-api
-    compile group: 'org.apache.tomcat', name: 'tomcat-servlet-api', version: '9.0.0.M17'
 }
