@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @CrossOrigin
 @Controller
-public class Version   {
-    @RequestMapping(value = "/version", method = RequestMethod.GET)
+public class TestVersion {
+    @RequestMapping(value = "/test_version", method = RequestMethod.GET)
     @ResponseBody
     // TODO 从war文件设置中读取版本信息用来显示
     public String get() {
